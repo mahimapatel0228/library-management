@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Import Books from Frappe API</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Number of Books to Import:</label>
+    <input type="number" name="num_books" min="1" max="100" value="20" required><br><br>
+
+    <label>Title (optional keyword):</label>
+    <input type="text" name="title" placeholder="e.g. Harry Potter"><br><br>
+
+    <button type="submit" class="btn">Import</button>
+</form>
+{% endblock %}

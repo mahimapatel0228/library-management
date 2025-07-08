@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Transaction History</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Member</th><th>Book</th><th>Issued</th><th>Returned</th><th>Return Date</th><th>Rent Fee</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for txn in transactions %}
+        <tr>
+            <td>{{ txn.member.name }}</td>
+            <td>{{ txn.book.title }}</td>
+            <td>{{ txn.issue_date }}</td>
+            <td>{{ txn.returned }}</td>
+            <td>{{ txn.return_date|default:"-" }}</td>
+            <td>{{ txn.rent_fee }}</td>
+            <td>
+                {% if not txn.returned %}
+                <a href="{% url 'return_book' txn.id %}" class="btn btn-danger">Return</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
